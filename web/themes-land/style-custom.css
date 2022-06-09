@@ -1,0 +1,103 @@
+/*
+ * @Author: Dicky Ermawan S., S.T., MTA 
+ * @Email: wanasaja@gmail.com 
+ * @Web: dickyermawan.github.io 
+ * @Linkedin: linkedin.com/in/dickyermawan 
+ * @Date: 2021-06-11 06:59:14 
+ * @Last Modified by: Dicky Ermawan S., S.T., MTA
+ * @Last Modified time: 2021-06-19 20:14:57
+ */
+
+@media (max-width: 991px) {
+    .navbar-custom {
+        margin-top: 0px;
+        padding: 10px 0px !important;
+        background-color: #ffffff !important;
+        -webkit-box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%);
+        /* box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%); */
+        box-shadow: 0 10px 23px -14px #e6f6f0 !important;
+    }
+}
+
+.navbar-custom {
+    margin-top: 0px;
+    padding: 20px 0px;
+    background-color: #410573;
+    color: white;
+    -webkit-box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%);
+    box-shadow: 0 10px 13px -14px #410573;
+    font-size: 1.0rem;
+    font-weight: 400;
+}
+
+
+.nav-sticky.navbar-custom {
+    margin-top: 0px;
+    padding: 10px 0px;
+    background-color: #410573;
+    color: white;
+    -webkit-box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%);
+    /* box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%); */
+    box-shadow: 0 10px 23px -14px #410573;
+    font-weight: 400;
+}
+
+.nav-sticky.navbar-custom .navbar-nav .nav-item.active .nav-link {
+    color: #ffffff !important;
+}
+
+.nav-sticky.navbar-custom .navbar-nav .nav-item.active .nav-link {
+    color: #ffffff !important;
+}
+
+.navbar-custom:hover,
+.nav-sticky a:hover {
+    color: #ffffff !important;
+}
+
+/* setting page pada beda layout */
+.section.page-content-first {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.bg-gradient {
+    background: -webkit-gradient(linear, left top, left bottom, from(#3a59af), to(#352786));
+    /* background: linear-gradient(to bottom, #ff7718, #b93507); */
+    /* background: linear-gradient(to bottom, #2536d5, #ef2f0e); */
+    background: linear-gradient(to bottom, #410573, #a246ee);
+}
+
+.btn-custom-orange {
+    color: #ffffff !important;
+    background: linear-gradient(to bottom, #ffb204, #ff7e00);
+}
+
+.btn-custom-blue {
+    color: #ffffff !important;
+    background: linear-gradient(to bottom, #5959ec, #28119a);
+}
+
+
+/* .navbar-custom {
+    margin-top: 0px;
+    padding: 10px 0px;
+    background-color: #ff7f07;
+    color: white;
+    -webkit-box-shadow: 0 10px 33px -14px rgb(0 0 0 / 10%);
+    box-shadow: 0 10px 13px -14px #ff9800;
+} */
+
+.nav-sticky.navbar-custom .navbar-nav .nav-item.active .nav-link {
+    color: #000000;
+}
+
+.nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link {
+    color: rgb(255 255 255 / 80%);
+}
+
+.img-shadow {
+    /* -webkit-filter: drop-shadow(5px 5px 5px #ff9800);
+    filter: drop-shadow(5px 5px 5px #ff9800); */
+    filter: drop-shadow(15px 5px 25px #c1c5c9);
+}
