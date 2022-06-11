@@ -8,6 +8,8 @@ use app\models\TiketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * TiketController implements the CRUD actions for Tiket model.
@@ -62,13 +64,48 @@ class TiketController extends Controller
     {
         $model = new Tiket();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tiket]);
+        if ($model->load(Yii::$app->request->post())) {
+            $microtime = microtime(true);
+
+            $lampiran_tiket = UploadedFile::getInstance($model, 'lampiran_tiket');
+
+            if (isset($lampiran_tiket)) {
+                $file_lampiran_tiket_lama = $model->lampiran_tiket;
+                $model->lampiran_tiket = rand(1, 5000) . '-lampiran_tiket-' . $microtime . '.' . $lampiran_tiket->getExtension() ?? $model->lampiran_tiket;
+            }
+
+            if ($model->save()) {
+                if (isset($lampiran_tiket)) {
+                    file_exists('@app/web/lampiran-tiket-seminar/' . $file_lampiran_tiket_lama) ? unlink(Url::to('@app/web/lampiran-tiket-seminar/' . $file_lampiran_tiket_lama)) : null;
+                    $lampiran_tiket->saveAs('@app/web/lampiran-tiket-seminar/' . $model->lampiran_tiket);
+                }
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
 
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        }
         return $this->render('create', [
             'model' => $model,
         ]);
+    }
+
+    function writeResponse($condition, $msg = null, $data = null)
+    {
+        $_res = new \stdClass();
+        $_res->con = $condition == true ? true : false;
+        $_res->msg = $msg;
+        $_res->results = $data;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // $response = new \Phalcon\Http\Response();
+        // return $response->setContent(json_encode($_res));
+        return $_res;
     }
 
     /**
@@ -81,11 +118,33 @@ class TiketController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldImage = $model->lampiran_tiket;
+        if ($model->load(Yii::$app->request->post())) {
+            $img = UploadedFile::getInstance($model, 'lampiran_tiket');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tiket]);
+            if (isset($img)) {
+                $lampiran_tiket_lama = $model->lampiran_tiket;
+                $model->lampiran_tiket = rand(1, 5000)  . '_lampiran_tiket.' . $img->getExtension() ?? $model->lampiran_tiket;
+            } else {
+                $model->lampiran_tiket = $oldImage;
+            }
+
+            if ($model->save()) {
+                if (isset($img)) {
+                    file_exists('@app/web/lampiran-tiket-seminar/' . $lampiran_tiket_lama) ? unlink(Url::to('@app/web/lampiran-tiket-seminar/' . $lampiran_tiket_lama)) : null;
+                    $img->saveAs('@app/web/lampiran-tiket-seminar/' . $model->lampiran_tiket);
+                }
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
 
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -100,9 +159,13 @@ class TiketController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id)->delete();
+        if ($model) {
+            return $this->writeResponse(true, 'Berhasil Menghapus Seminar');
+        } else {
 
-        return $this->redirect(['index']);
+            return $this->writeResponse(false, 'Tidak Berhasil Menghapus Seminar');
+        }
     }
 
     /**

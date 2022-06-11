@@ -23,7 +23,7 @@ use yii\helpers\Url;
 
         <!-- SidebarSearch Form -->
         <!-- href be escaped -->
-       
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
@@ -46,7 +46,8 @@ use yii\helpers\Url;
 
                     ['label' => 'Data Seminar', 'icon' => 'star', 'url' => ['/seminar/index'],],
                     ['label' => 'Pembicara', 'icon' => 'users', 'url' => ['/pembicara/index'],],
-                    ['label' => 'Ticket', 'icon' => 'ticket-alt', 'url' => ['/tiket/index'],],
+                    ['label' => 'Tiket', 'icon' => 'ticket-alt', 'url' => ['/tiket/index'],],
+                    ['label' => 'Sponsor', 'icon' => 'user-friends', 'url' => ['/sponsor/index'],],
 
                 ]
             ]);

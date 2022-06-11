@@ -118,7 +118,6 @@ class PembicaraController extends Controller
         $oldImage = $model->foto;
         if (Yii::$app->request->post()) {
 
-
             $img = UploadedFile::getInstance($model, 'foto');
 
             if (isset($img)) {

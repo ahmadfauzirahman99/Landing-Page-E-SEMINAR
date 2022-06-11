@@ -32,13 +32,13 @@ $("#responsive-datatable").DataTable({
             "class": "text-center",
             "targets": [4],
             render: (data, type, row, meta) => {
-                var a = "<a target='_blank' href='" + baseUrl + "/foto-seminar/" + row[3] + "' class='btn btn-info btn-sm'>Link Gambar</a>";
+                var a = "<a target='_blank' href='" + baseUrl + "lampiran-tiket-seminar/" + row[4] + "' class='btn btn-info btn-sm'>Link Gambar</a>";
                 return a;
             }
         },
         {
             "class": "text-center",
-            "targets": [3, 2, 1]
+            "targets": [1]
         }
     ],
     //     {

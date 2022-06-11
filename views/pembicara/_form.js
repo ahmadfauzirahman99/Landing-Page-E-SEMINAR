@@ -26,6 +26,8 @@ $(`#form`)
                     successMsg(result.msg);
                     resetBtnLoading(btn, html);
                     updateDataTable();
+                    $('#mymodal2').modal('hide')
+
                     //     // location.replace(baseUrl + "pasien/update?id=" + result.id);
                     //     // $('.btn-next').show('slow');
                     //     // $('.progress-daftar').removeClass('inactive progress-bar-warning').addClass('progress-bar-success active').find('.status-icon').html('<i class=\'fa fa-check-circle\'></i>');

@@ -26,8 +26,12 @@ class TiketController extends ControllerBase
         $columns = [
             ['db' => 't.id_tiket', 'dt' => 0, 'field' => 'id_tiket'],
             ['db' => 's.nama_seminar', 'dt' => 1, 'field' => 'nama_seminar'],
-            ['db' => 't.harga_tiket', 'dt' => 2, 'field' => 'harga_tiket'],
-            ['db' => 't.slot_tiket', 'dt' => 3, 'field' => 'slot_tiket'],
+            ['db' => 't.harga_tiket', 'dt' => 2, 'field' => 'harga_tiket', 'formatter' => function ($d) {
+                return Yii::$app->formatter->asCurrency($d);
+            }],
+            ['db' => 't.slot_tiket', 'dt' => 3, 'field' => 'slot_tiket', 'formatter' => function ($d) {
+                return $d . ' Buah';
+            }],
             ['db' => 't.lampiran_tiket', 'dt' => 4, 'field' => 'lampiran_tiket'],
         ];
 

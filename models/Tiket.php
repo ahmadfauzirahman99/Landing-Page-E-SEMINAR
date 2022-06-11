@@ -29,7 +29,7 @@ class Tiket extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_seminar', 'harga_tiket', 'slot_tiket', 'lampiran_tiket'], 'required'],
+            [['id_seminar', 'harga_tiket', 'slot_tiket'], 'required'],
             [['id_seminar', 'harga_tiket', 'slot_tiket'], 'integer'],
             [['lampiran_tiket'], 'string', 'max' => 100],
         ];
@@ -42,7 +42,7 @@ class Tiket extends \yii\db\ActiveRecord
     {
         return [
             'id_tiket' => 'Id Tiket',
-            'id_seminar' => 'Id Seminar',
+            'id_seminar' => 'Seminar',
             'harga_tiket' => 'Harga Tiket',
             'slot_tiket' => 'Slot Tiket',
             'lampiran_tiket' => 'Lampiran Tiket',

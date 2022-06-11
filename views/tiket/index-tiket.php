@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <thead>
                             <tr>
                                 <th style="text-align: center;" width="20%">Aksi</th>
-                                <th style="text-align: center;" width="25%">Nama Pembicara</th>
+                                <th style="text-align: center;" width="25%">Nama Seminar</th>
                                 <th style="text-align: center;" width="25%">Harga </th>
                                 <th style="text-align: center;" width="25%">Slot</th>
                                 <th style="text-align: center;" width="25%">Lampiran</th>

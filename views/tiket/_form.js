@@ -1,4 +1,14 @@
-$(`#form-seminar`)
+$(document).ready(function () {
+    $('#tiket-slot_tiket').keypress(function (e) {
+        var charCode = (e.which) ? e.which : event.keyCode;
+        if (String.fromCharCode(charCode).match(/[^0-9]/g))
+            return false;
+    });
+})
+
+
+
+$(`#form`)
     .on("beforeSubmit", function (e) {
         e.preventDefault();
 
@@ -6,8 +16,8 @@ $(`#form-seminar`)
         var btn = $(".btn-submit");
         var html = btn.html();
         setBtnLoading(btn, "Menyimpan");
-        var formURL = $("#form-seminar").attr("action");
-        var formData = new FormData($('#form-seminar')[0])
+        var formURL = $("#form").attr("action");
+        var formData = new FormData($('#form')[0])
 
         $.ajax({
             url: formURL,
@@ -15,10 +25,8 @@ $(`#form-seminar`)
             cache: false,
             contentType: false,
             processData: false,
-
             // Form data
             data: formData,
-
             success: function (result) {
 
                 console.log(result);
@@ -27,7 +35,6 @@ $(`#form-seminar`)
                     resetBtnLoading(btn, html);
                     updateDataTable();
                     $('#mymodal2').modal('hide')
-
                     //     // location.replace(baseUrl + "pasien/update?id=" + result.id);
                     //     // $('.btn-next').show('slow');
                     //     // $('.progress-daftar').removeClass('inactive progress-bar-warning').addClass('progress-bar-success active').find('.status-icon').html('<i class=\'fa fa-check-circle\'></i>');
