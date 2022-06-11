@@ -2,11 +2,11 @@
 
 use yii\helpers\Url;
 ?>
-<aside class="main-sidebar sidebar-light-purple elevation-4">
+<aside class="main-sidebar sidebar-light-green elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Url::to(['/site/index']) ?>" class="brand-link" style="font-family: 'Lora', cursive;font-weight: 100 !important;">
-        <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light "><b><strong style="margin-top: 11px;">&nbsp; RUANG HATI</strong></b></span>
+        <img src="<?= Url::to('@web/img/psychology-sider.png') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .9">
+        <span class="brand-text font-weight-light "><b><strong style="margin-top: 10px;font-size:18px">&nbsp;&nbsp; RUANG HATI</strong></b></span>
     </a>
 
     <!-- Sidebar -->
@@ -38,6 +38,8 @@ use yii\helpers\Url;
                             ['label' => 'Home', 'url' => ['site/index'], 'iconStyle' => 'far'],
                         ]
                     ],
+                    ['label' => 'Menu Biodata', 'url' => '', 'header' => true],
+                    ['label' => 'Biodata Pengguna', 'icon' => 'user', 'url' => ['/site/biodata-diri'],],
                     ['label' => 'Menu User', 'url' => '', 'header' => true],
 
                     ['label' => 'Data User', 'icon' => 'users', 'url' => ['/users/index'],],

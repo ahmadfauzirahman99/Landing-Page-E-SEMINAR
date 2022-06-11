@@ -34,15 +34,15 @@ JsAsset::register($this)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Roboto:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <script>
         const baseUrl = '<?= Yii::$app->homeUrl ?>';
     </script>
     <style>
         #app {
-            font-family: 'Inter', sans-serif !important;
-            font-weight: 300 !important;
+            font-family: 'Roboto', sans-serif !important;
+            font-weight: 400 !important;
         }
 
         .table td,
@@ -56,7 +56,7 @@ JsAsset::register($this)
     <?php $this->head() ?>
 </head>
 
-<body id="app" class="hold-transition sidebar-mini  layout-fixed text-md layout-navbar-fixed">
+<body id="app" class="hold-transition sidebar-mini  layout-fixed text-sm layout-navbar-fixed">
     <?php $this->beginBody() ?>
 
     <div class="wrapper">

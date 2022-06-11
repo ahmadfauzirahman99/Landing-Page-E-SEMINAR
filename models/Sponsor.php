@@ -28,7 +28,7 @@ class Sponsor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_sponsor', 'gambar', 'id_seminar'], 'required'],
+            [['nama_sponsor', 'id_seminar'], 'required'],
             [['id_seminar'], 'integer'],
             [['nama_sponsor'], 'string', 'max' => 30],
             [['gambar'], 'string', 'max' => 100],
@@ -44,7 +44,7 @@ class Sponsor extends \yii\db\ActiveRecord
             'id_sponsor' => 'Id Sponsor',
             'nama_sponsor' => 'Nama Sponsor',
             'gambar' => 'Gambar',
-            'id_seminar' => 'Id Seminar',
+            'id_seminar' => 'Seminar',
         ];
     }
 }

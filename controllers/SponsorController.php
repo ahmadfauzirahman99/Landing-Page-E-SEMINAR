@@ -8,6 +8,8 @@ use app\models\SponsorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * SponsorController implements the CRUD actions for Sponsor model.
@@ -38,7 +40,7 @@ class SponsorController extends Controller
         $searchModel = new SponsorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index-sponsor', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -66,13 +68,44 @@ class SponsorController extends Controller
     {
         $model = new Sponsor();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_sponsor]);
+        if ($model->load(Yii::$app->request->post())) {
+            $microtime = microtime(true);
+
+            $gambar = UploadedFile::getInstance($model, 'gambar');
+
+            if (isset($gambar)) {
+                $file_gambar_lama = $model->gambar;
+                $model->gambar = rand(1, 5000) . '-gambar-' . $microtime . '.' . $gambar->getExtension() ?? $model->gambar;
+            }
+
+            if ($model->save()) {
+                if (isset($gambar)) {
+                    file_exists('@app/web/gambar-sponsor/' . $file_gambar_lama) ? unlink(Url::to('@app/web/gambar-sponsor/' . $file_gambar_lama)) : null;
+                    $gambar->saveAs('@app/web/gambar-sponsor/' . $model->gambar);
+                }
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+    function writeResponse($condition, $msg = null, $data = null)
+    {
+        $_res = new \stdClass();
+        $_res->con = $condition == true ? true : false;
+        $_res->msg = $msg;
+        $_res->results = $data;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // $response = new \Phalcon\Http\Response();
+        // return $response->setContent(json_encode($_res));
+        return $_res;
     }
 
     /**
@@ -85,11 +118,33 @@ class SponsorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldImage = $model->gambar;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_sponsor]);
+        if ($model->load(Yii::$app->request->post())) {
+            $img = UploadedFile::getInstance($model, 'gambar');
+
+            if (isset($img)) {
+                $gambar_lama = $model->gambar;
+                $model->gambar = rand(1, 5000)  . '_gambar.' . $img->getExtension() ?? $model->gambar;
+            } else {
+                $model->gambar = $oldImage;
+            }
+
+            if ($model->save()) {
+                if (isset($img)) {
+                    file_exists('@app/web/gambar-sponsor/' . $gambar_lama) ? unlink(Url::to('@app/web/gambar-sponsor/' . $gambar_lama)) : null;
+                    $img->saveAs('@app/web/gambar-sponsor/' . $model->gambar);
+                }
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
-
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -104,9 +159,13 @@ class SponsorController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id)->delete();
+        if ($model) {
+            return $this->writeResponse(true, 'Berhasil Menghapus Seminar');
+        } else {
 
-        return $this->redirect(['index']);
+            return $this->writeResponse(false, 'Tidak Berhasil Menghapus Seminar');
+        }
     }
 
     /**

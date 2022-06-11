@@ -143,4 +143,9 @@ class SiteController extends Controller
 
         return $modelHapusFotoDiri->save();
     }
+
+    public function actionBiodataDiri()
+    {
+        return $this->render('biodata-diri');
+    }
 }
