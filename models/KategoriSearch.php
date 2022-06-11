@@ -2,18 +2,17 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Kategori;
 
 /**
- * KategoriSearch represents the model behind the search form about `app\models\Kategori`.
+ * KategoriSearch represents the model behind the search form of `app\models\Kategori`.
  */
 class KategoriSearch extends Kategori
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -24,7 +23,7 @@ class KategoriSearch extends Kategori
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -43,6 +42,8 @@ class KategoriSearch extends Kategori
     {
         $query = Kategori::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -55,6 +56,7 @@ class KategoriSearch extends Kategori
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id_kategori' => $this->id_kategori,
             'craeted_at' => $this->craeted_at,

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Kategori;
-use app\models\KategoriSearch;
+use app\models\DataPribadi;
+use app\models\DataPribadiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * KategoriController implements the CRUD actions for Kategori model.
+ * DataPribadiController implements the CRUD actions for DataPribadi model.
  */
-class KategoriController extends Controller
+class DataPribadiController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class KategoriController extends Controller
     }
 
     /**
-     * Lists all Kategori models.
+     * Lists all DataPribadi models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new KategoriSearch();
+        $searchModel = new DataPribadiSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Displays a single Kategori model.
+     * Displays a single DataPribadi model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class KategoriController extends Controller
     }
 
     /**
-     * Creates a new Kategori model.
+     * Creates a new DataPribadi model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Kategori();
+        $model = new DataPribadi();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_kategori]);
+            return $this->redirect(['view', 'id' => $model->id_data_pribadi]);
         }
 
         return $this->render('create', [
@@ -76,7 +76,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Updates an existing Kategori model.
+     * Updates an existing DataPribadi model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +87,7 @@ class KategoriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_kategori]);
+            return $this->redirect(['view', 'id' => $model->id_data_pribadi]);
         }
 
         return $this->render('update', [
@@ -96,7 +96,7 @@ class KategoriController extends Controller
     }
 
     /**
-     * Deletes an existing Kategori model.
+     * Deletes an existing DataPribadi model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class KategoriController extends Controller
     }
 
     /**
-     * Finds the Kategori model based on its primary key value.
+     * Finds the DataPribadi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Kategori the loaded model
+     * @return DataPribadi the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Kategori::findOne($id)) !== null) {
+        if (($model = DataPribadi::findOne($id)) !== null) {
             return $model;
         }
 

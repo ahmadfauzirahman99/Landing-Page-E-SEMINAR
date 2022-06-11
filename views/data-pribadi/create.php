@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Kategori */
+/* @var $model app\models\DataPribadi */
 
-$this->title = 'Create Kategori';
-$this->params['breadcrumbs'][] = ['label' => 'Kategoris', 'url' => ['index']];
+$this->title = 'Create Data Pribadi';
+$this->params['breadcrumbs'][] = ['label' => 'Data Pribadis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

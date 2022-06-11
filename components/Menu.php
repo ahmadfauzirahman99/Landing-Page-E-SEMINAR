@@ -1,4 +1,5 @@
 <?php
+
 namespace app\components;
 
 use yii\helpers\ArrayHelper;
@@ -50,17 +51,17 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $linkTemplate = '<a class="waves-effect {active}" href="{url}" {target}>{icon} {label}</a>';
+    public $linkTemplate = '<a class="nav-link {active}" href="{url}" {target}>{icon} {label}</a>';
 
     /**
      * @inheritdoc
      */
-    public $labelTemplate = '';
+    public $labelTemplate = '<p>{label} {treeFlag} {badge}</p>';
 
     /**
      * @var string treeview wrapper
      */
-    public $treeTemplate = "\n<ul class=''>\n{items}\n</ul>\n";
+    public $treeTemplate = "\n<ul class='nav nav-treeview'>\n{items}\n</ul>\n";
 
     /**
      * @var string
@@ -75,7 +76,7 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $itemOptions = ['class' => 'waves-effect'];
+    public $itemOptions = ['class' => 'nav-item'];
 
     /**
      * @inheritdoc
@@ -86,8 +87,8 @@ class Menu extends \yii\widgets\Menu
      * @inheritdoc
      */
     public $options = [
-        'class' => '',
-        'data-widget' => '',
+        'class' => 'nav nav-pills nav-sidebar flex-column nav-flat nav-legacy nav-compact nav-child-indent text-sm',
+        'data-widget' => 'treeview',
         'role' => 'menu',
         'data-accordion' => 'false'
     ];
@@ -140,7 +141,7 @@ class Menu extends \yii\widgets\Menu
 
     protected function renderItem($item)
     {
-        if(isset($item['header']) && $item['header']) {
+        if (isset($item['header']) && $item['header']) {
             return $item['label'];
         }
 
@@ -149,11 +150,11 @@ class Menu extends \yii\widgets\Menu
         } else {
             $iconStyle = $item['iconStyle'] ?? static::$iconStyleDefault;
             $icon = $item['icon'] ?? static::$iconDefault;
-            $iconClassArr = ['nav-icon', $iconStyle, 'fa-'.$icon];
+            $iconClassArr = ['nav-icon', $iconStyle, 'fa-' . $icon];
             isset($item['iconClassAdded']) && $iconClassArr[] = $item['iconClassAdded'];
             $iconClass = implode(' ', $iconClassArr);
         }
-        $iconHtml = '<i class="'.$iconClass.'"></i>';
+        $iconHtml = '<i class="' . $iconClass . '"></i>';
 
         $treeFlag = '';
         if (isset($item['items'])) {
@@ -170,7 +171,7 @@ class Menu extends \yii\widgets\Menu
             '{url}' => isset($item['url']) ? Url::to($item['url']) : '#',
             '{icon}' => $iconHtml,
             '{active}' => $item['active'] ? $this->activeCssClass : '',
-            '{target}' => isset($item['target']) ? 'target="'.$item['target'].'"' : ''
+            '{target}' => isset($item['target']) ? 'target="' . $item['target'] . '"' : ''
         ]);
     }
 }

@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\KategoriSearch */
+/* @var $searchModel app\models\DataPribadiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kategori Pelayanan';
+$this->title = 'Data Pribadis';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <?= Html::a('Create Kategori', ['create'], ['class' => 'btn btn-success']) ?>
+                            <?= Html::a('Create Data Pribadi', ['create'], ['class' => 'btn btn-success']) ?>
                         </div>
                     </div>
 
@@ -31,10 +31,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
 
-                            'id_kategori',
-                            'nama_kategori',
-                            'craeted_at',
-                            'craeted_by',
+                            'id_data_pribadi',
+                            'u_id',
+                            'nama_lengkap',
+                            'nik',
+                            'tempat_lahir',
+                            //'tanggal_lahir',
+                            //'jenis_kelamin',
+                            //'kewenegaraan',
+                            //'agama',
+                            //'alamat:ntext',
+                            //'id_kel',
+                            //'rt',
+                            //'rw',
+                            //'kode_pos',
+                            //'status',
+                            //'no_telp',
+                            //'foto:ntext',
+                            //'id_kec',
+                            //'id_kab',
+                            //'id_prov',
+                            //'lat',
+                            //'lng',
 
                             ['class' => 'hail812\adminlte3\yii\grid\ActionColumn'],
                         ],

@@ -5,25 +5,22 @@ use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Kategori */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap4\ActiveForm */
 ?>
 
 <div class="kategori-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nama_kategori')->textInput(['maxlength' => true, 'placeholder' => 'Masukkan Kategori']) ?>
+    <?= $form->field($model, 'nama_kategori')->textInput(['maxlength' => true]) ?>
 
-    <?php $form->field($model, 'craeted_at')->textInput() ?>
+    <?= $form->field($model, 'craeted_at')->textInput() ?>
 
-    <?php $form->field($model, 'craeted_by')->textInput() ?>
+    <?= $form->field($model, 'craeted_by')->textInput() ?>
 
-
-    <?php if (!Yii::$app->request->isAjax) { ?>
-        <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        </div>
-    <?php } ?>
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

@@ -1,13 +1,12 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Kategori */
+/* @var $model app\models\DataPribadi */
 
-$this->title = 'Create Kategori';
-$this->params['breadcrumbs'][] = ['label' => 'Kategoris', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Update Data Pribadi: ' . $model->id_data_pribadi;
+$this->params['breadcrumbs'][] = ['label' => 'Data Pribadis', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id_data_pribadi, 'url' => ['view', 'id' => $model->id_data_pribadi]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 
 <div class="container-fluid">

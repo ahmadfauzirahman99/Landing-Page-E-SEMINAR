@@ -41,8 +41,8 @@ JsAsset::register($this)
     </script>
     <style>
         #app {
-            font-family: 'Roboto', sans-serif !important;
-            font-weight: 400 !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 300 !important;
         }
 
         .table td,
@@ -56,7 +56,7 @@ JsAsset::register($this)
     <?php $this->head() ?>
 </head>
 
-<body id="app" class="hold-transition sidebar-mini  layout-fixed text-sm layout-navbar-fixed">
+<body id="app" class="hold-transition sidebar-mini layout-fixed text-sm" style="height: auto;">
     <?php $this->beginBody() ?>
 
     <div class="wrapper">
