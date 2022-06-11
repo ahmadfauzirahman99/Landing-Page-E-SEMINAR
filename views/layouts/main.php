@@ -56,7 +56,7 @@ JsAsset::register($this)
     <?php $this->head() ?>
 </head>
 
-<body id="app" class="hold-transition sidebar-mini layout-fixed text-md layout-navbar-fixed">
+<body id="app" class="hold-transition sidebar-mini sidebar-collapse layout-fixed text-md layout-navbar-fixed">
     <?php $this->beginBody() ?>
 
     <div class="wrapper">
