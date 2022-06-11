@@ -16,10 +16,6 @@ use yii\web\View;
     form .form-group {
         margin-bottom: 0.15rem;
     }
-
-    datepicker-kv.css .datepicker {
-        z-index: 1151 !important;
-    }
 </style>
 
 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -30,26 +26,28 @@ use yii\web\View;
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <?php $form = ActiveForm::begin([
+
+            'layout' => 'horizontal',
+            'id' => 'form-seminar',
+            // 'action' => ['/pos/penunjang'],
+            'fieldConfig' => [
+                'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+                'horizontalCssClasses' => [
+                    'label' => 'col-sm-3 col-form-label-sm',
+                    'wrapper' => 'col-sm-9',
+                    'error' => '',
+                    'hint' => '',
+                ],
+            ],
+            'options' => ['enctype' => 'multipart/form-data', 'autocomplete' => 'off'],
+
+        ]); ?>
         <div class="modal-body">
 
             <div class="seminar-form">
 
-                <?php $form = ActiveForm::begin([
 
-                    'layout' => 'horizontal',
-                    // 'action' => ['/pos/penunjang'],
-                    'fieldConfig' => [
-                        'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-                        'horizontalCssClasses' => [
-                            'label' => 'col-sm-3 col-form-label-sm',
-                            'wrapper' => 'col-sm-9',
-                            'error' => '',
-                            'hint' => '',
-                        ],
-                    ],
-                    'options' => ['enctype' => 'multipart/form-data', 'autocomplete' => 'off'],
-
-                ]); ?>
 
                 <?= $form->field($model, 'nama_seminar')->textInput(['maxlength' => true, 'placeholder' => 'Nama Seminar']) ?>
 
@@ -89,27 +87,24 @@ use yii\web\View;
                                 'url' => Url::to(['site/hapus-foto-diri-ktp']), // server delete action 
                                 'key' => $model->id_seminar,
                                 'extra' => [
-                                    'jenis_foto' => 'foto',
+                                    'jenis_foto' => 'lampiran',
                                     'nama_file' => $model->lampiran
                                 ]
                             ],
                         ],
                         'overwriteInitial' => true,
                         'maxFileSize' => 2800,
-                        // 'deleteUrl' => Url::to(['/site/file-upload']),
                     ]
                 ]);
                 ?>
-                <div class="modal-footer">
 
-                    <div class="form-group">
-                        <?= Html::submitButton('Simpan Form Seminar', ['class' => 'btn btn-success']) ?>
-                    </div>
-
-                    <?php ActiveForm::end(); ?>
-                </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary btn-submit float-left btn-sm" type="submit">Simpan Data Seminar</button>
+
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
 

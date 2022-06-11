@@ -29,7 +29,7 @@ class Pembicara extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_pembicara', 'latar_belakang', 'id_seminar', 'foto'], 'required'],
+            [['nama_pembicara', 'latar_belakang', 'id_seminar'], 'required'],
             [['id_seminar'], 'integer'],
             [['nama_pembicara'], 'string', 'max' => 150],
             [['latar_belakang', 'foto'], 'string', 'max' => 100],

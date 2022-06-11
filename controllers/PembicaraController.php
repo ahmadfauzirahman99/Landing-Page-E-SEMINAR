@@ -37,13 +37,8 @@ class PembicaraController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PembicaraSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index-pembicara', []);
     }
 
     /**
@@ -68,13 +63,45 @@ class PembicaraController extends Controller
     {
         $model = new Pembicara();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_pembicara]);
+        if ($model->load(Yii::$app->request->post())) {
+            $microtime = microtime(true);
+
+            $foto = UploadedFile::getInstance($model, 'foto');
+
+            if (isset($foto)) {
+                $file_foto_lama = $model->foto;
+                $model->foto = rand(1, 5000) . '-foto-' . $microtime . '.' . $foto->getExtension() ?? $model->foto;
+            }
+
+            if ($model->save()) {
+                if (isset($foto)) {
+                    file_exists('@app/web/foto-seminar/' . $file_foto_lama) ? unlink(Url::to('@app/web/foto-seminar/' . $file_foto_lama)) : null;
+                    $foto->saveAs('@app/web/foto-seminar/' . $model->foto);
+                }
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    function writeResponse($condition, $msg = null, $data = null)
+    {
+        $_res = new \stdClass();
+        $_res->con = $condition == true ? true : false;
+        $_res->msg = $msg;
+        $_res->results = $data;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // $response = new \Phalcon\Http\Response();
+        // return $response->setContent(json_encode($_res));
+        return $_res;
     }
 
     /**
@@ -88,29 +115,34 @@ class PembicaraController extends Controller
     {
         $model = $this->findModel($id);
 
+        $oldImage = $model->foto;
         if (Yii::$app->request->post()) {
 
 
             $img = UploadedFile::getInstance($model, 'foto');
 
-            if ($img) {
+            if (isset($img)) {
                 $foto_lama = $model->foto;
                 $model->foto = $model->id_pembicara . '_foto.' . $img->getExtension() ?? $model->foto;
+            } else {
+                $model->foto = $oldImage;
             }
 
             if ($model->save()) {
-                if ($img) {
+                if (isset($img)) {
                     file_exists('@app/web/foto-seminar/' . $foto_lama) ? unlink(Url::to('@app/web/foto-seminar/' . $foto_lama)) : null;
                     $img->saveAs('@app/web/foto-seminar/' . $model->foto);
                 }
-                return $this->redirect(['view', 'id' => $model->id_pembicara]);
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
             } else {
-
-                // $model->u_id = Yii::$app->user->identity->id;
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
             }
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
         }
         return $this->render('update', [
             'model' => $model,
@@ -126,9 +158,13 @@ class PembicaraController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id)->delete();
+        if ($model) {
+            return $this->writeResponse(true, 'Berhasil Menghapus Seminar');
+        } else {
 
-        return $this->redirect(['index']);
+            return $this->writeResponse(false, 'Tidak Berhasil Menghapus Seminar');
+        }
     }
 
     /**

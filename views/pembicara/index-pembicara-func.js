@@ -1,9 +1,9 @@
-updateSeminar = (e) => {
+update = (e) => {
     let id = $(e).data('id');
     // console.log(id);
     // e.preventDefault();
     $.ajax({
-        url: baseUrl + 'seminar/update?id=' + id,
+        url: baseUrl + 'pembicara/update?id=' + id,
         type: 'GET',
         success: (result) => {
             $('#mymodal2').html(result);
@@ -12,9 +12,9 @@ updateSeminar = (e) => {
     });
 }
 
-tambahSeminar = () => {
+tambah = () => {
     $.ajax({
-        url: baseUrl + 'seminar/create',
+        url: baseUrl + 'pembicara/create',
         type: 'GET',
         success: (result) => {
             $('#mymodal2').html(result);
@@ -24,7 +24,7 @@ tambahSeminar = () => {
 }
 
 
-hapusData = (e) => {
+hapus = (e) => {
     let id = $(e).data('value');
     Swal.fire({
         title: 'Perhatian!',
@@ -37,7 +37,7 @@ hapusData = (e) => {
         cancelButtonText: 'Batal',
     }).then((result) => {
         if (result.value) {
-            $.post(baseUrl + 'seminar/delete?id=' + id, function (r) {
+            $.post(baseUrl + 'pembicara/delete?id=' + id, function (r) {
 
                 if (r.con) {
                     updateDataTable();

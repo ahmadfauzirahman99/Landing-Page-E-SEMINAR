@@ -4,7 +4,7 @@ use yii\helpers\Url;
 ?>
 <aside class="main-sidebar sidebar-light-purple elevation-4">
     <!-- Brand Logo -->
-    <a href="<?= Url::to(['/site/index']) ?>" class="brand-link">
+    <a href="<?= Url::to(['/site/index']) ?>" class="brand-link" style="font-family: 'Lora', cursive;font-weight: 100 !important;">
         <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light "><b><strong style="margin-top: 11px;">&nbsp; RUANG HATI</strong></b></span>
     </a>
@@ -23,22 +23,14 @@ use yii\helpers\Url;
 
         <!-- SidebarSearch Form -->
         <!-- href be escaped -->
-        <!-- <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div> -->
-
+       
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
+                    ['label' => 'Dashbord', 'url' => '', 'header' => true],
+
                     [
                         'label' => 'Dashboard',
                         'icon' => 'tachometer-alt',
@@ -46,8 +38,15 @@ use yii\helpers\Url;
                             ['label' => 'Home', 'url' => ['site/index'], 'iconStyle' => 'far'],
                         ]
                     ],
+                    ['label' => 'Menu User', 'url' => '', 'header' => true],
+
                     ['label' => 'Data User', 'icon' => 'users', 'url' => ['/users/index'],],
+
+                    ['label' => 'Data Master Seminar', 'url' => '', 'header' => true],
+
                     ['label' => 'Data Seminar', 'icon' => 'star', 'url' => ['/seminar/index'],],
+                    ['label' => 'Pembicara', 'icon' => 'users', 'url' => ['/pembicara/index'],],
+                    ['label' => 'Ticket', 'icon' => 'ticket-alt', 'url' => ['/tiket/index'],],
 
                 ]
             ]);

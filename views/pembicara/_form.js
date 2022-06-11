@@ -1,4 +1,4 @@
-$(`#form-seminar`)
+$(`#form`)
     .on("beforeSubmit", function (e) {
         e.preventDefault();
 
@@ -6,8 +6,8 @@ $(`#form-seminar`)
         var btn = $(".btn-submit");
         var html = btn.html();
         setBtnLoading(btn, "Menyimpan");
-        var formURL = $("#form-seminar").attr("action");
-        var formData = new FormData($('#form-seminar')[0])
+        var formURL = $("#form").attr("action");
+        var formData = new FormData($('#form')[0])
 
         $.ajax({
             url: formURL,

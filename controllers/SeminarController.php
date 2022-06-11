@@ -64,13 +64,33 @@ class SeminarController extends Controller
     {
         $model = new Seminar();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_seminar]);
+        if ($model->load(Yii::$app->request->post())) {
+            $microtime = microtime(true);
+
+            $lampiran = UploadedFile::getInstance($model, 'lampiran');
+
+            if (isset($lampiran)) {
+                $file_lampiran_lama = $model->lampiran;
+                $model->lampiran = rand(1, 5000) . '-lampiran-' . $microtime . '.' . $lampiran->getExtension() ?? $model->lampiran;
+            }
+
+            if ($model->save()) {
+                if (isset($lampiran)) {
+                    file_exists('@app/web/lampiran-seminar/' . $file_lampiran_lama) ? unlink(Url::to('@app/web/lampiran-seminar/' . $file_lampiran_lama)) : null;
+                    $lampiran->saveAs('@app/web/lampiran-seminar/' . $model->lampiran);
+                }
+
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Tidak Berhasil Menginput Data', $model->errors);
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
@@ -83,29 +103,31 @@ class SeminarController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $oldImage = $model->lampiran;
         if ($model->load(Yii::$app->request->post())) {
             $microtime = microtime(true);
 
             $lampiran = UploadedFile::getInstance($model, 'lampiran');
 
-            if ($lampiran) {
+            if (isset($lampiran)) {
                 $file_lampiran_lama = $model->lampiran;
-                $model->lampiran = $model->id_seminar . '-lampiran-' . $microtime . '.' . $lampiran->getExtension() ?? $model->lampiran;
+                $model->lampiran =  rand(1, 5000) . '-lampiran-' . $microtime . '.' . $lampiran->getExtension() ?? $model->lampiran;
+            } else {
+                $model->lampiran = $oldImage;
             }
 
 
+
             if ($model->save()) {
-                if ($lampiran) {
+                if (isset($lampiran)) {
                     file_exists('@app/web/lampiran-seminar/' . $file_lampiran_lama) ? unlink(Url::to('@app/web/lampiran-seminar/' . $file_lampiran_lama)) : null;
                     $lampiran->saveAs('@app/web/lampiran-seminar/' . $model->lampiran);
                 }
-                return $this->redirect(['view', 'id' => $model->id_seminar]);
-            } else {
 
-                // $model->u_id = Yii::$app->user->identity->id;
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
+                return $this->writeResponse(true, 'Berhasil Menginput Data');
+            } else {
+                return $this->writeResponse(false, 'Berhasil Menginput Data');
             }
         }
 
@@ -120,6 +142,19 @@ class SeminarController extends Controller
         ]);
     }
 
+    function writeResponse($condition, $msg = null, $data = null)
+    {
+        $_res = new \stdClass();
+        $_res->con = $condition == true ? true : false;
+        $_res->msg = $msg;
+        $_res->results = $data;
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        // $response = new \Phalcon\Http\Response();
+        // return $response->setContent(json_encode($_res));
+        return $_res;
+    }
+
     /**
      * Deletes an existing Seminar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -129,9 +164,13 @@ class SeminarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id)->delete();
+        if ($model) {
+            return $this->writeResponse(true, 'Berhasil Menghapus Seminar');
+        } else {
 
-        return $this->redirect(['index']);
+            return $this->writeResponse(false, 'Tidak Berhasil Menghapus Seminar');
+        }
     }
 
     /**

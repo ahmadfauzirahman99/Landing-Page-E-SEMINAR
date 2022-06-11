@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 DatatableAsset::register($this);
-$this->title = 'List Seminar';
+$this->title = 'List Pembicara';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
@@ -21,19 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-header">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a href="#" onclick="tambahSeminar()" class="btn bg-gradient-purple">Tambah Seminar <span class="fas fa-plus"></span></a>
+                            <a href="#" onclick="tambah()" class="btn bg-gradient-purple">Tambah Pembicara <span class="fas fa-plus"></span></a>
                             <a href="#" onclick="updateDataTable()" class="btn btn-default">Refresh <span class="fas fa-spinner"></span></a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="responsive-datatable" width="100%" class="table table-bordered table-striped">
+                    <table id="responsive-datatable" width="100%" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align: center;" width="15%">Aksi</th>
-                                <th style="text-align: center;" width="25%">Nama Seminar</th>
-                                <th style="text-align: center;" width="25%">Tanggal Pelaksanaan</th>
-                                <th style="text-align: center;" width="25%">Lampiran</th>
+                                <th style="text-align: center;" width="20%">Aksi</th>
+                                <th style="text-align: center;" width="25%">Nama Pembicara</th>
+                                <th style="text-align: center;" width="25%">Latar Belakang</th>
+                                <th style="text-align: center;" width="25%">Seminar</th>
+                                <th style="text-align: center;" width="25%">Foto</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,5 +50,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--.row-->
 </div>
 <div class="modal fade bd-example-modal-lg" id="mymodal2" tabindex="false" role="dialog" data-keyboard='false' aria-labelledby="myModalLabel"></div>
-<?php $this->registerJs($this->render('index-seminar.js'), View::POS_END) ?>
-<?php $this->registerJs($this->render('index-seminar-func.js'), View::POS_END) ?>
+<?php $this->registerJs($this->render('index-pembicara.js'), View::POS_END) ?>
+<?php $this->registerJs($this->render('index-pembicara-func.js'), View::POS_END) ?>

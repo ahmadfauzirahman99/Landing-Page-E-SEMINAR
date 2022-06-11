@@ -22,9 +22,9 @@ $("#responsive-datatable").DataTable({
             "targets": [0],
             render: (data, type, row, meta) => {
 
-                var tr = "<a href='" + baseUrl + "users/update?id=" + row[0] + "' data-toggle='modal' data-title='Data Profile Pasien' data-target='#myModal' class='btn btn-primary btn-icon btn-md'><span class='fas fa-pencil-alt'></span></a> &nbsp;"
-                    + "<a href='#' onClick='ubahStatus(this)' data-status='" + row[5] + "' data-value='" + row[0] + "' class='btn btn-warning btn-icon btn-md'><span class='fas fa-check'></span></a> &nbsp;"
-                    + "<a href='#' onClick='ubahPasswordDefault(this)' data-value='" + row[0] + "' class='btn btn-danger btn-icon btn-md'><span class='fas fa-key'></span></a> &nbsp;";
+                var tr = "<a href='" + baseUrl + "users/update?id=" + row[0] + "' data-toggle='modal' data-title='Data Profile Pasien' data-target='#myModal' class='btn btn-outline-primary btn-icon btn-md'><span class='fas fa-pencil-alt'></span></a> &nbsp;"
+                    + "<a href='#' onClick='ubahStatus(this)' data-status='" + row[5] + "' data-value='" + row[0] + "' class='btn btn-outline-warning btn-icon btn-md'><span class='fas fa-check'></span></a> &nbsp;"
+                    + "<a href='#' onClick='ubahPasswordDefault(this)' data-value='" + row[0] + "' class='btn btn-outline-danger btn-icon btn-md'><span class='fas fa-key'></span></a> &nbsp;";
                 return tr;
             }
         },

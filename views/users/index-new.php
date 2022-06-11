@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-md-12">
-                            <a href="<?= Url::to(['users/create']) ?>" data-toggle='modal' data-title='Tambah Data Pengguna' data-target='#myModal' class="btn bg-gradient-purple">Tambah Pengguna <span class="fas fa-plus"></span></a>
+                            <a href="#" data-toggle='modal' data-title='Tambah Data Pengguna' data-target='#myModal' class="btn bg-gradient-purple">Tambah Pengguna <span class="fas fa-plus"></span></a>
                             <a href="#" onclick="updateDataTable()" class="btn btn-default">Refresh <span class="fas fa-spinner"></span></a>
                         </div>
                     </div>

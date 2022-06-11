@@ -4,8 +4,7 @@
 /* @var $content string */
 
 use app\assets\JsAsset;
-use app\components\Modal;
-use yii\bootstrap\Modal as BootstrapModal;
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
@@ -35,14 +34,22 @@ JsAsset::register($this)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;500;700&family=Open+Sans:wght@300;500;700&family=Plus+Jakarta+Sans:wght@300;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
     <script>
         const baseUrl = '<?= Yii::$app->homeUrl ?>';
     </script>
     <style>
         #app {
-            font-family: 'Roboto', sans-serif !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 300 !important;
+        }
+
+        .table td,
+        .table th {
+            padding: .45rem !important;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
         }
     </style>
     <title><?= Html::encode($this->title) ?></title>
@@ -126,7 +133,7 @@ JsAsset::register($this)
         // modal.find('.modal-body').html(bodyLoad)
         $.get(href)
             .done(function(data) {
-                modal.find('.m3odal-body').html(data)
+                modal.find('.modal-body').html(data)
             });
     })
 </script>

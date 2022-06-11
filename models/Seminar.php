@@ -11,9 +11,13 @@ use Yii;
  * @property string $nama_seminar
  * @property string $tgl_pelaksana
  * @property string $lampiran
+ * @property string $status
  */
 class Seminar extends \yii\db\ActiveRecord
 {
+
+    // const AKTIF;
+
     /**
      * {@inheritdoc}
      */
@@ -28,8 +32,8 @@ class Seminar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_seminar', 'tgl_pelaksana', 'lampiran'], 'required'],
-            [['tgl_pelaksana'], 'safe'],
+            [['nama_seminar', 'tgl_pelaksana'], 'required'],
+            [['tgl_pelaksana','status'], 'safe'],
             [['nama_seminar'], 'string', 'max' => 50],
             [['lampiran'], 'string', 'max' => 64],
         ];
