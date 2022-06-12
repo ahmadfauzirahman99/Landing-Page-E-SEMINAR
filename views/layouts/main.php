@@ -41,7 +41,7 @@ JsAsset::register($this)
     </script>
     <style>
         #app {
-            font-family: 'Inter', sans-serif !important;
+            font-family: 'Roboto', sans-serif !important;
             font-weight: 300 !important;
         }
 

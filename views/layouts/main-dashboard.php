@@ -24,9 +24,9 @@ LandingAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="developer" content="Ahmad Fauzi Rahman, S.T., MTA"/>
+    <meta name="developer" content="Ahmad Fauzi Rahman, S.T., MTA" />
     <link rel="shortcut icon" href="<?= Url::to('@web/img/logo_occ/logo1png.png') ?>">
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fresca&family=Inter:wght@100;300;500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Roboto:ital,wght@0,300;0,400;0,700;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <script>
         // const baseUrl = '<?= Yii::$app->homeUrl ?>';
     </script>
@@ -34,7 +34,8 @@ LandingAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <style>
         * {
-            font-family: 'Quicksand', sans-serif !important;
+            font-family: 'Roboto', sans-serif !important;
+            font-weight: 300 I !important;
         }
 
         .img-border {
@@ -63,7 +64,7 @@ LandingAsset::register($this);
             <!-- LOGO -->
             <a class="logo text-uppercase" href="<?= Url::to(['/main/index']) ?>">
                 <img src="<?= Url::to('@web/img/psychology.png') ?>" alt="" class="logo-light" height="35" /> <b>Ruang Hati</b>
-                <img src="<?= Url::to('@web/img/psychology.png') ?>" alt="" class="logo-dark" height="35" /> 
+                <img src="<?= Url::to('@web/img/psychology.png') ?>" alt="" class="logo-dark" height="35" />
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,11 +78,11 @@ LandingAsset::register($this);
                     <li class="nav-item">
                         <a href="#services" class="nav-link">Fitur</a>
                     </li>
-                   
+
                     <li class="nav-item">
                         <a href="#klien" class="nav-link">Klien</a>
                     </li>
-                   
+
                     <li class="nav-item">
                         <a href="#" class="nav-link">Pendaftaran</a>
                     </li>
